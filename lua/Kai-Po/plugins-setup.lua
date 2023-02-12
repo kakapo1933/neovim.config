@@ -26,6 +26,7 @@ end
 return packer.startup(function(use)
 	use("wbthomason/packer.nvim")
 
+	-- color shceme
 	use({ "bluz71/vim-nightfly-colors", as = "nightfly" })
 
 	-- tmux & split window navigation
@@ -93,6 +94,9 @@ return packer.startup(function(use)
 
 	-- git integration
 	use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
+
+	-- Adds indentation guides to all lines
+	use("lukas-reineke/indent-blankline.nvim")
 
 	if packer_bootstrap then
 		require("packer").sync()
