@@ -28,7 +28,7 @@ return packer.startup(function(use)
 
 	-- color shceme
 	use({ "bluz71/vim-nightfly-colors", as = "nightfly" })
-
+	use("Mofiqul/dracula.nvim")
 	-- tmux & split window navigation
 	-- switch window with C + H J K L
 	use("christoomey/vim-tmux-navigator")

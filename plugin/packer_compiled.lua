@@ -104,6 +104,11 @@ _G.packer_plugins = {
     path = "/Users/kasperchen/.local/share/nvim/site/pack/packer/start/comment.nvim",
     url = "https://github.com/numToStr/comment.nvim"
   },
+  ["dracula.nvim"] = {
+    loaded = true,
+    path = "/Users/kasperchen/.local/share/nvim/site/pack/packer/start/dracula.nvim",
+    url = "https://github.com/Mofiqul/dracula.nvim"
+  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "/Users/kasperchen/.local/share/nvim/site/pack/packer/start/friendly-snippets",
