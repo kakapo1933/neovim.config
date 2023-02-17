@@ -1,6 +1,11 @@
 -- vim.cmd([[colorscheme nightfly]])
 
-local dracula = require("dracula")
+local setup, dracula = pcall(require, "dracula")
+
+if not setup then
+	return
+end
+
 dracula.setup({
 	-- customize dracula color palette
 	colors = {
