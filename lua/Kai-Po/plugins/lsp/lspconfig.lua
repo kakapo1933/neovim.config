@@ -16,13 +16,18 @@ if not typescript_setup then
 	return
 end
 
+local util_setup, util = pcall(require, "lspconfig/util")
+if not util_setup then
+	return
+end
+
 local keymap = vim.keymap
 
--- enable keybinds for available lsp server
+-- Enable keybinds for available lsp server
 local on_attach = function(client, bufnr)
 	local opts = { noremap = true, silent = true, buffer = bufnr }
 
-	-- set keybinds
+	-- Set keybinds
 	keymap.set("n", "gf", "<cmd>Lspsaga lsp_finder<CR>", opts) -- show definition, references
 	keymap.set("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts) -- got to declaration
 	keymap.set("n", "gd", "<cmd>Lspsaga peek_definition<CR>", opts) -- see definition and make edits in window
@@ -36,7 +41,7 @@ local on_attach = function(client, bufnr)
 	keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts) -- show documentation for what is under cursor
 	keymap.set("n", "<leader>o", "<cmd>LSoutlineToggle<CR>", opts) -- see outline on right hand side
 
-	-- typescript specific keymaps (e.g. rename file and update imports)
+	-- Typescript specific keymaps (e.g. rename file and update imports)
 	if client.name == "tsserver" then
 		keymap.set("n", "<leader>rf", ":TypescriptRenameFile<CR>") -- rename file and update imports
 		keymap.set("n", "<leader>oi", ":TypescriptOrganizeImports<CR>") -- organize imports (not in youtube nvim video)
@@ -44,7 +49,7 @@ local on_attach = function(client, bufnr)
 	end
 end
 
--- used to enable autocompletion (assign to every lsp server config)
+-- Used to enable autocompletion (assign to every lsp server config)
 local capabilities = cmp_nvim_lsp.default_capabilities()
 
 -- Change the Diagnostic symbols in the sign column (gutter)
@@ -55,7 +60,7 @@ for type, icon in pairs(signs) do
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
 
--- configure rust rust analyzer server
+-- Configure rust rust analyzer server
 lspconfig["rust_analyzer"].setup({
 	on_attach = on_attach,
 	settings = {
@@ -78,13 +83,29 @@ lspconfig["rust_analyzer"].setup({
 	},
 })
 
--- configure html server
+-- Configure golang server
+lspconfig["gopls"].setup({
+	on_attach = on_attach,
+	cmd = { "gopls", "serve" },
+	filetypes = { "go", "gomod" },
+	root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+	settings = {
+		gopls = {
+			analyses = {
+				unusedparams = true,
+			},
+			staticcheck = true,
+		},
+	},
+})
+
+-- Configure html server
 lspconfig["html"].setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
 })
 
--- configure typescript server with plugin
+-- Configure typescript server with plugin
 typescript.setup({
 	server = {
 		capabilities = capabilities,
@@ -92,13 +113,13 @@ typescript.setup({
 	},
 })
 
--- configure css server
+-- Configure css server
 lspconfig["cssls"].setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
 })
 
--- configure eslint server
+-- Configure eslint server
 lspconfig["eslint"].setup({
 	capabilities = capabilities,
 	on_attach = on_attach,

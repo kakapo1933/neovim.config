@@ -33,53 +33,53 @@ return packer.startup(function(use)
 	-- switch window with C + H J K L
 	use("christoomey/vim-tmux-navigator")
 
-	-- essential plugins
-	-- use ys+w+(",',()) to add surrounded
-	-- use ds+(",',()) to delete surrounded
+	-- Essential plugins
+	-- Use ys+w+(",',()) to add surrounded
+	-- Use ds+(",',()) to delete surrounded
 	use("tpope/vim-surround")
 
-	-- commenting with gcc / gc(amount)j
+	-- Commenting with gcc / gc(amount)j
 	use("numToStr/comment.nvim")
 
-	-- file explorer
+	-- File explorer
 	use("nvim-tree/nvim-tree.lua")
 
-	-- icons
+	-- Icons
 	use("kyazdani42/nvim-web-devicons")
 
-	-- statusline
+	-- Statusline
 	use("nvim-lualine/lualine.nvim")
 
-	-- fuzzy finding
+	-- Fuzzy finding
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 	use({ "nvim-telescope/telescope.nvim", branch = "0.1.x", requires = { { "nvim-lua/plenary.nvim" } } })
 
-	-- autocompletion
+	-- Autocompletion
 	use("hrsh7th/nvim-cmp")
 	use("hrsh7th/cmp-buffer")
 	use("hrsh7th/cmp-path")
 
-	-- snippets
+	-- Snippets
 	use("L3MON4D3/LuaSnip")
 	use("saadparwaiz1/cmp_luasnip")
 	use("rafamadriz/friendly-snippets")
 
-	-- managing & installing lsp servers, linters & formatters
+	-- Managing & installing lsp servers, linters & formatters
 	use("williamboman/mason.nvim")
 	use("williamboman/mason-lspconfig.nvim")
 
-	-- configuring lsp servers
+	-- Configuring lsp servers
 	use("neovim/nvim-lspconfig")
 	use("hrsh7th/cmp-nvim-lsp") -- for autocompletion
 	use({ "glepnir/lspsaga.nvim", branch = "main" }) -- enhanced lsp uis
 	use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
 	use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
 
-	-- fromatting & linting
+	-- Fromatting & linting
 	use("jose-elias-alvarez/null-ls.nvim")
 	use("jayp0521/mason-null-ls.nvim")
 
-	-- treesitter configuration
+	-- Treesitter configuration
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		run = function()
@@ -88,15 +88,19 @@ return packer.startup(function(use)
 		end,
 	})
 
-	-- auto closing
+	-- Auto closing
 	use("windwp/nvim-autopairs") -- autoclose parens, brackets, quotes, etc...
 	use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" }) -- autoclose tags
 
-	-- git integration
+	-- Git integration
 	use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
 
-	-- Adds indentation guides to all lines
+	-- Add indentation guides to all lines
 	use("lukas-reineke/indent-blankline.nvim")
+
+	-- Go.nvim
+	use("ray-x/go.nvim")
+	use("ray-x/guihua.lua")
 
 	if packer_bootstrap then
 		require("packer").sync()
